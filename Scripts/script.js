@@ -4,6 +4,10 @@ const btnAll = document.getElementById("btn-all");
 const btnOpen = document.getElementById("btn-open");
 const btnClosed = document.getElementById("btn-closed");
 
+const issuesALl =[];
+const issuesOpen =[];
+const issuesClosed =[];
+
 function toggleButton(id) {
   btnAll.classList.remove("btn-primary");
   btnOpen.classList.remove("btn-primary");
@@ -44,18 +48,30 @@ async function getCards(clickedBtn)
 
   const issues = await res.json();
 
+  countIssues(issues.data);
+
   if(clickedBtn==='btn-all')
   {
      loadIssues(issues.data);
+     renderAllCounter();
+
+     console.log(issuesALl.length);
   }
   else if(clickedBtn==='btn-open')
   {
     loadIssuesOpen(issues.data);
+    renderOpenCounter();
+
+      console.log(issuesOpen.length);
   }
   else if(clickedBtn==='btn-closed')
   {
     loadIssuesClosed(issues.data);
+    renderClosedCounter();
+
+    console.log(issuesClosed.length);
   }
+
 
  
 }
@@ -106,7 +122,7 @@ function loadOpen(issue, icContainer) {
                 <!-- By WHom and date div-->
                 <div class="flex flex-col gap-5 text-sm text-gray-500">
 
-                    <p># by <span class="font-medium text-gray-700">by - ${issue.author}</span></p>
+                    <p># by <span class="font-medium text-gray-700">${issue.author}</span></p>
                     <p>Created At - ${issue.createdAt}</p>
                     <p>Updated At - ${issue.updatedAt}</p>
 
@@ -164,7 +180,7 @@ function loadClosed(issue, icContainer) {
                 <!-- By WHom and date div-->
                 <div class="flex flex-col gap-5 text-sm text-gray-500">
 
-                    <p># by <span class="font-medium text-gray-700">by - ${issue.author}</span></p>
+                    <p># by <span class="font-medium text-gray-700">${issue.author}</span></p>
                     <p>Created At - ${issue.createdAt}</p>
                     <p>Updated At - ${issue.updatedAt}</p>
 
@@ -228,3 +244,65 @@ function loadIssuesClosed(issues)
 }
 
 getCards('btn-all');
+
+
+function countIssues(issues) {
+
+    issues.forEach(element => {
+
+        const issue = {
+            issueID: element.id,
+            issueTitle: element.title,
+            issueDescription: element.description,
+            issueStatus: element.status,
+            issueLabels: element.labels,
+            issuePriority: element.priority,
+            issueAuthor: element.author
+        };
+
+      
+        if (!issuesALl.find(item => item.issueID === issue.issueID)) {
+            issuesALl.push(issue);
+        }
+
+       
+        if (issue.issueStatus === 'open') {
+            if (!issuesOpen.find(item => item.issueID === issue.issueID)) {
+                issuesOpen.push(issue);
+            }
+        }
+
+        
+        else if (issue.issueStatus === 'closed') {
+            if (!issuesClosed.find(item => item.issueID === issue.issueID)) {
+                issuesClosed.push(issue);
+            }
+        }
+
+    });
+
+}
+
+
+
+
+
+function renderAllCounter()
+{
+    const AllCounter = document.getElementById('issue-num');
+    AllCounter.innerText = issuesALl.length;
+
+}
+
+function renderOpenCounter()
+{
+    const AllCounter = document.getElementById('issue-num');
+    AllCounter.innerText = issuesOpen.length;
+}
+
+function renderClosedCounter()
+{
+    const AllCounter = document.getElementById('issue-num');
+    AllCounter.innerText = issuesClosed.length;
+}
+
