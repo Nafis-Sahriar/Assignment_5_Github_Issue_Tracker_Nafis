@@ -4,9 +4,9 @@ const btnAll = document.getElementById("btn-all");
 const btnOpen = document.getElementById("btn-open");
 const btnClosed = document.getElementById("btn-closed");
 
-const issuesALl =[];
-const issuesOpen =[];
-const issuesClosed =[];
+const issuesALl = [];
+const issuesOpen = [];
+const issuesClosed = [];
 
 function toggleButton(id) {
   btnAll.classList.remove("btn-primary");
@@ -19,29 +19,22 @@ function toggleButton(id) {
 }
 
 // Toggle button Funtion
-function toggle(id) 
-{
+function toggle(id) {
   toggleButton(id);
 
-  if(id==='btn-all')
-  {
-    getCards('btn-all');
-  }
-  else if(id==='btn-open')
-  {
-     getCards('btn-open');
-  }
-  else if(id==='btn-closed')
-  {
-    getCards('btn-closed');
+  if (id === "btn-all") {
+    getCards("btn-all");
+  } else if (id === "btn-open") {
+    getCards("btn-open");
+  } else if (id === "btn-closed") {
+    getCards("btn-closed");
   }
 }
 
 // Fetch and get all section Cards
 // Bismillahir Rahmanir Rahim.
 
-async function getCards(clickedBtn) 
-{
+async function getCards(clickedBtn) {
   const url = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
 
   const res = await fetch(url);
@@ -50,30 +43,22 @@ async function getCards(clickedBtn)
 
   countIssues(issues.data);
 
-  if(clickedBtn==='btn-all')
-  {
-     loadIssues(issues.data);
-     renderAllCounter();
+  if (clickedBtn === "btn-all") {
+    loadIssues(issues.data);
+    renderAllCounter();
 
-     console.log(issuesALl.length);
-  }
-  else if(clickedBtn==='btn-open')
-  {
+    console.log(issuesALl.length);
+  } else if (clickedBtn === "btn-open") {
     loadIssuesOpen(issues.data);
     renderOpenCounter();
 
-      console.log(issuesOpen.length);
-  }
-  else if(clickedBtn==='btn-closed')
-  {
+    console.log(issuesOpen.length);
+  } else if (clickedBtn === "btn-closed") {
     loadIssuesClosed(issues.data);
     renderClosedCounter();
 
     console.log(issuesClosed.length);
   }
-
-
- 
 }
 
 function loadOpen(issue, icContainer) {
@@ -110,10 +95,9 @@ function loadOpen(issue, icContainer) {
                 </div>
 
                 <!-- Tag | Dynamically Load Hobe API theke -->
-                <div class="flex flex-wrap gap-2 mb-4">
+                <div class="flex flex-wrap gap-2 mb-4 label-div">
 
-                    <button class="text-xs px-3 py-1 bg-gray-100 rounded-full">Tag - 1</button>
-                    <button class="text-xs px-3 py-1 bg-gray-100 rounded-full">Tag - 2</button>
+                   
 
                 </div>
 
@@ -132,7 +116,22 @@ function loadOpen(issue, icContainer) {
             </div>
     `;
 
-    container.append(ic);
+  container.append(ic);
+
+  const labelContainer = ic.querySelector(".label-div");
+
+  const labelsArr = issue.labels;
+
+  for (label of labelsArr) {
+    const labelButton = document.createElement("button");
+
+    labelButton.innerHTML = `
+        
+          <button class="text-xs px-3 py-1 bg-yellow-100 border border-yellow-400 text-yellow-800 rounded-full">${label}</button>
+
+        `;
+    labelContainer.append(labelButton);
+  }
 }
 
 function loadClosed(issue, icContainer) {
@@ -168,10 +167,11 @@ function loadClosed(issue, icContainer) {
                 </div>
 
                 <!-- Tag | Dynamically Load Hobe API theke -->
-                <div class="flex flex-wrap gap-2 mb-4">
+                <div class="flex flex-wrap gap-2 mb-4 label-div">
 
-                    <button class="text-xs px-3 py-1 bg-gray-100 rounded-full">Tag - 1</button>
-                    <button class="text-xs px-3 py-1 bg-gray-100 rounded-full">Tag - 2</button>
+                    
+
+
 
                 </div>
 
@@ -190,119 +190,100 @@ function loadClosed(issue, icContainer) {
             </div>
     `;
 
-    container.append(ic);
+  container.append(ic);
+
+  const labelContainer = ic.querySelector(".label-div");
+
+  const labelsArr = issue.labels;
+
+  for (label of labelsArr) {
+    const labelButton = document.createElement("button");
+
+    labelButton.innerHTML = `
+        
+          <button class="text-xs px-3 py-1 bg-yellow-100 border border-yellow-400 text-yellow-800 rounded-full">${label}</button>
+
+        `;
+    labelContainer.append(labelButton);
+  }
 }
 
-function loadIssues(issues) 
-{
+function loadIssues(issues) {
   const issueContainer = document.getElementById("ic-container");
   issueContainer.innerHTML = "";
 
-  for (let issue of issues) 
- {
-    if (issue.status === "open") 
-    {
+  for (let issue of issues) {
+    if (issue.status === "open") {
       loadOpen(issue, issueContainer);
-    } 
-    else if (issue.status === "closed") 
-    {
+    } else if (issue.status === "closed") {
       loadClosed(issue, issueContainer);
     }
- }
+  }
 }
 
-
-
-
-
-function loadIssuesOpen(issues) 
-{
+function loadIssuesOpen(issues) {
   const issueContainer = document.getElementById("ic-container");
   issueContainer.innerHTML = "";
 
-  for (let issue of issues) 
-  {
-    if (issue.status === "open") 
-    {
+  for (let issue of issues) {
+    if (issue.status === "open") {
       loadOpen(issue, issueContainer);
-    } 
+    }
   }
 }
 
-function loadIssuesClosed(issues) 
-{
+function loadIssuesClosed(issues) {
   const issueContainer = document.getElementById("ic-container");
   issueContainer.innerHTML = "";
 
-  for (let issue of issues) 
-  {
-    if (issue.status === "closed") 
-    {
+  for (let issue of issues) {
+    if (issue.status === "closed") {
       loadClosed(issue, issueContainer);
-    } 
+    }
   }
 }
 
-getCards('btn-all');
-
+getCards("btn-all");
 
 function countIssues(issues) {
+  issues.forEach((element) => {
+    const issue = {
+      issueID: element.id,
+      issueTitle: element.title,
+      issueDescription: element.description,
+      issueStatus: element.status,
+      issueLabels: element.labels,
+      issuePriority: element.priority,
+      issueAuthor: element.author,
+    };
 
-    issues.forEach(element => {
+    if (!issuesALl.find((item) => item.issueID === issue.issueID)) {
+      issuesALl.push(issue);
+    }
 
-        const issue = {
-            issueID: element.id,
-            issueTitle: element.title,
-            issueDescription: element.description,
-            issueStatus: element.status,
-            issueLabels: element.labels,
-            issuePriority: element.priority,
-            issueAuthor: element.author
-        };
-
-      
-        if (!issuesALl.find(item => item.issueID === issue.issueID)) {
-            issuesALl.push(issue);
-        }
-
-       
-        if (issue.issueStatus === 'open') {
-            if (!issuesOpen.find(item => item.issueID === issue.issueID)) {
-                issuesOpen.push(issue);
-            }
-        }
-
-        
-        else if (issue.issueStatus === 'closed') {
-            if (!issuesClosed.find(item => item.issueID === issue.issueID)) {
-                issuesClosed.push(issue);
-            }
-        }
-
-    });
-
+    if (issue.issueStatus === "open") {
+      if (!issuesOpen.find((item) => item.issueID === issue.issueID)) {
+        issuesOpen.push(issue);
+      }
+    } else if (issue.issueStatus === "closed") {
+      if (!issuesClosed.find((item) => item.issueID === issue.issueID)) {
+        issuesClosed.push(issue);
+      }
+    }
+  });
 }
 
-
-
-
-
-function renderAllCounter()
-{
-    const AllCounter = document.getElementById('issue-num');
-    AllCounter.innerText = issuesALl.length;
-
+function renderAllCounter() {
+  const AllCounter = document.getElementById("issue-num");
+  AllCounter.innerText = issuesALl.length;
 }
 
-function renderOpenCounter()
-{
-    const AllCounter = document.getElementById('issue-num');
-    AllCounter.innerText = issuesOpen.length;
+function renderOpenCounter() {
+  const AllCounter = document.getElementById("issue-num");
+  AllCounter.innerText = issuesOpen.length;
 }
 
-function renderClosedCounter()
-{
-    const AllCounter = document.getElementById('issue-num');
-    AllCounter.innerText = issuesClosed.length;
+function renderClosedCounter() {
+  const AllCounter = document.getElementById("issue-num");
+  AllCounter.innerText = issuesClosed.length;
 }
-
