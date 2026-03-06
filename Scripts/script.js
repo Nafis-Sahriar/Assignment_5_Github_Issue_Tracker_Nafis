@@ -69,7 +69,7 @@ function loadOpen(issue, icContainer) {
   ic.innerHTML = `
 
 
-    <div id="ic-crd-open" class="p-5 bg-base-100 border-t-5 border-t-green-500 shadow-md rounded-xl  hover:shadow-lg hover:shadow-green-200 transition ">
+    <div onclick="my_modal_1.showModal()" id="ic-crd-open" class="p-5 bg-base-100 border-t-5 border-t-green-500 shadow-md rounded-xl  hover:shadow-lg hover:shadow-green-200 transition ">
 
                 <!-- Logo ar priority tag er div -->
                 <div class="flex justify-between items-center mb-3">
@@ -141,7 +141,7 @@ function loadClosed(issue, icContainer) {
 
   ic.innerHTML = `
 
-     <div id="ic-crd-closed" class="p-5 bg-base-100 border-t-5 border-t-purple-500 shadow-md rounded-xl hover:shadow-lg hover:shadow-purple-200 transition ">
+     <div onclick="my_modal_1.showModal()" id="ic-crd-closed" class="p-5 bg-base-100 border-t-5 border-t-purple-500 shadow-md rounded-xl hover:shadow-lg hover:shadow-purple-200 transition ">
 
                 <!-- Logo ar priority tag er div -->
                 <div class="flex justify-between items-center mb-3">
