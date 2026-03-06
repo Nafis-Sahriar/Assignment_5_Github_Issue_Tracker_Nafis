@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Earth</title>
+    <title>GitHub Issue Tracker</title>
     <link rel="stylesheet" href="./Styles/styles.css">
+    <link rel="shortcut icon" href="./assets/github-logo.png" type="image/x-icon">
 
     <!-- Daisy UI + Tailwind -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
@@ -26,7 +27,7 @@
     <style>
         * {
             font-family: "Geist", sans-serif;
-            
+
         }
     </style>
 
@@ -34,10 +35,66 @@
 
 <body>
 
-    <h1 class="text-xl font-bold text-green-600">Bismillahir Rahmanir Rahim -- GitHub Issue Tracker Initialized. <i class="fa-solid fa-circle-check"></i></h1>
+
+    <!-- Login section -->
+    <section class="min-h-screen flex items-center justify-center px-4">
+
+        <div class="w-full sm:w-8/12 md:w-5/12 lg:w-4/14 ">
+
+            <fieldset class="fieldset bg-white shadow-md  rounded-box text-center  p-4">
+
+                <div>
+
+                    <div class="flex justify-center mb-6">
+                        <img src="./assets/github-logo.png" alt="">
+                    </div>
+
+                    <div class="space-y-5">
+                        <h1 class="font-bold text-3xl">GitHub Issues Tracker</h1>
+                        <p class="text-gray-600">Sign in to manage your issues</p>
+                    </div>
+
+
+
+                </div>
+
+
+                <label class="label">Username</label>
+                <input id="login-username" type="text" class="input w-full" placeholder="Enter username" />
+
+                <label class="label">Password</label>
+                <input id="login-password" type="password" class="input w-full" placeholder="Enter password" />
+
+                <button class="btn rounded-md mt-4 mb-8 btn-primary w-full" id="btn-login">Login</button>
+
+                <hr>
+
+                <div class="">
+
+                    <p class="font-bold text-xl mt-5">Demo Credintials</p>
+
+                    <div class="bg-gray-200 mt-5 w-1/2 mx-auto p-3 rounded-md">
+                        <p> <span class="font-bold">Username :</span> admin</p>
+                        <p> <span class="font-bold">Password :</span> admin123</p>
+
+                    </div>
+
+                </div>
+
+            </fieldset>
+
+        </div>
+
+    </section>
+
+
+
+
+
 
 
     <script src="./Scripts/script.js"></script>
+    <script src="./Scripts/login.js"></script>
 </body>
 
 </html>
