@@ -40,7 +40,8 @@
         <!-- NavBar with Search -->
         <div class="navbar bg-base-100 shadow-sm">
             <div class="flex-1">
-                <a class="btn btn-ghost text-xl"><img class="w-[50px]" src="./assets/github-logo.png" alt=""> GitHub Issue Tracker</a>
+                <a class="btn btn-ghost text-xl"><img class="w-[50px]" src="./assets/github-logo.png" alt=""> GitHub
+                    Issue Tracker</a>
             </div>
             <div class="flex gap-2">
                 <input type="text" placeholder="Search issues" class="input input-bordered w-24 md:w-auto" />
@@ -81,7 +82,7 @@
                     <h3 class="font-bold text-2xl"><span id="issue-counter">Counter</span> Issues</h3>
                     <p class="text-gray-500">Track and manage your project issues</p>
                 </div>
-                
+
             </div>
 
 
@@ -89,14 +90,14 @@
             <div class="flex items-start flex-col md:flex-row gap-5 ">
 
                 <div class="flex gap-3 justify-center items-center">
-                      <div class="border-green-500 w-5 h-5 rounded-full bg-green-600 text-green-500 text-center"></div>
-                <p>Open</p>
+                    <div class="border-green-500 w-5 h-5 rounded-full bg-green-600 text-green-500 text-center"></div>
+                    <p>Open</p>
                 </div>
                 <div class="flex  gap-3 justify-center items-center">
-                      <div class="border-purple-500 w-5 h-5 rounded-full bg-purple-600 text-purple-500 text-center"></div>
-                <p>Closed</p>
+                    <div class="border-purple-500 w-5 h-5 rounded-full bg-purple-600 text-purple-500 text-center"></div>
+                    <p>Closed</p>
                 </div>
-              
+
 
 
 
@@ -104,13 +105,111 @@
 
             </div>
 
-            
+
 
 
         </div>
 
-        
+    </section>
 
+
+    <section id="issue-card-section" class="w-10/12 mx-auto mt-10">
+
+
+        <div id="ic-container" class="w-full mx-auto grid grid-cols-1 md:grid-cols-3 gap-5 bg-white shadow-md">
+
+            <div id="ic-crd-open" class="p-5 bg-base-100 border-t-5 border-t-green-500 shadow-md rounded-xl  hover:shadow-lg hover:shadow-green-200 transition ">
+
+                <!-- Logo ar priority tag er div -->
+                <div class="flex justify-between items-center mb-3">
+
+                    <div class="flex items-center gap-3">
+                        <img class="w-9 h-9 rounded-full object-cover" src="./assets/Open-Status.png" alt="">
+                        <span class="text-sm font-medium text-gray-500">Open</span>
+                    </div>
+
+                    <p class="font-semibold bg-red-100 text-red-600 px-3 py-1 rounded-full">HIGH</p>
+
+                </div>
+
+                <!-- Title + Description | Eta dynamically load hobe API Theke -->
+                <div class="mb-7">
+                    <h1 class="font-semibold text-2xl mb-3">
+                        Fix navigation menu on mobile devices
+                    </h1>
+
+                    <p class="text-sm text-gray-500 line-clamp-2">
+                        The navigation menu doesn't collapse properly on mobile devices : checking if line clap is working or not. if workingt here will not be the texts i am writting now. 
+                    </p>
+                </div>
+
+                <!-- Tag | Dynamically Load Hobe API theke -->
+                <div class="flex flex-wrap gap-2 mb-4">
+
+                    <button class="text-xs px-3 py-1 bg-gray-100 rounded-full">Tag - 1</button>
+                    <button class="text-xs px-3 py-1 bg-gray-100 rounded-full">Tag - 2</button>
+
+                </div>
+
+                <hr class="mb-3">
+
+                <!-- By WHom and date div-->
+                <div class="flex flex-col gap-5 text-sm text-gray-500">
+
+                    <p># by <span class="font-medium text-gray-700">john_doe</span></p>
+                    <p>06/02/2025</p>
+
+                </div>
+
+            </div>
+
+
+            <div id="ic-crd-closed" class="p-5 bg-base-100 border-t-5 border-t-purple-500 shadow-md rounded-xl hover:shadow-lg hover:shadow-purple-200 transition ">
+
+                <!-- Logo ar priority tag er div -->
+                <div class="flex justify-between items-center mb-3">
+
+                    <div class="flex items-center gap-3">
+                        <img class="w-9 h-9 rounded-full object-cover" src="./assets/Closed- Status .png" alt="">
+                        <span class="text-sm font-medium text-gray-500">Closed</span>
+                    </div>
+
+                    <p class="font-semibold bg-red-100 text-red-600 px-3 py-1 rounded-full">HIGH</p>
+
+                </div>
+
+                <!-- Title + Description | Eta dynamically load hobe API Theke -->
+                <div class="mb-7">
+                    <h1 class="font-semibold text-2xl mb-3">
+                        Fix navigation menu on mobile devices
+                    </h1>
+
+                    <p class="text-sm text-gray-500 line-clamp-2">
+                        The navigation menu doesn't collapse properly on mobile devices : checking if line clap is working or not. if workingt here will not be the texts i am writting now. 
+                    </p>
+                </div>
+
+                <!-- Tag | Dynamically Load Hobe API theke -->
+                <div class="flex flex-wrap gap-2 mb-4">
+
+                    <button class="text-xs px-3 py-1 bg-gray-100 rounded-full">Tag - 1</button>
+                    <button class="text-xs px-3 py-1 bg-gray-100 rounded-full">Tag - 2</button>
+
+                </div>
+
+                <hr class="mb-3">
+
+                <!-- By WHom and date div-->
+                <div class="flex flex-col gap-5 text-sm text-gray-500">
+
+                    <p># by <span class="font-medium text-gray-700">john_doe</span></p>
+                    <p>06/02/2025</p>
+
+                </div>
+
+            </div>
+
+            
     </section>
 
 
