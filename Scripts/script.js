@@ -15,7 +15,13 @@ function toggleButton(id)
   clicked.classList.add("btn-primary");
 }
 
+// Toggle button Funtion
 function toggle(id) 
 {
   toggleButton(id);
 }
+
+
+
+
+
