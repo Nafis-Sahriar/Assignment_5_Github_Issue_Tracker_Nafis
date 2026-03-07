@@ -339,7 +339,9 @@ async function loadModal(id)
 
                     <div class="">
                         <p class="text-gray-500 mb-1">Priority:</p>
-                        <p class=" px-4 py-1 rounded-full bg-gray-300 border-l-gray-700">${issue.priority}</p>
+                        <div class="modal-priority">
+                            
+                        </div>
                     </div>
                 </div>
 
@@ -375,6 +377,47 @@ async function loadModal(id)
     labelContainer.append(labelButton);
     
     }
+
+
+    const prior = modalOpen.querySelector('.modal-priority');
+
+    const priortag = document.createElement('p');
+    priortag.innerHTML="";
+
+    if(issue.priority==='high')
+    {
+        priortag.innerHTML=`
+
+         <p class=" px-4 py-1 rounded-full bg-red-300 border-l-red-700 font-bold text-red-800">${issue.priority}</p>
+        `
+        prior.append(priortag);
+
+    }
+    else if(issue.priority==='medium')
+    {
+         priortag.innerHTML=`
+
+         <p class=" px-4 py-1 rounded-full bg-orange-300 border-l-orange-700 font-bold text-orange-800">${issue.priority}</p>
+        `
+         prior.append(priortag);
+    }
+    else if(issue.priority==='low')
+    {
+         priortag.innerHTML=`
+
+         <p class=" px-4 py-1 rounded-full bg-gray-300 border-gray-700 font-bold text-gray-800">${issue.priority}</p>
+        `
+         prior.append(priortag);
+    }
+
+   
+
+
+
+
+
+
+
 
     my_modal_1.showModal();
    }
@@ -461,6 +504,8 @@ async function loadModal(id)
    
 
 }
+
+
 
 
 
