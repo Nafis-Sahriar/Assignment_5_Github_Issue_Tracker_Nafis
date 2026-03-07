@@ -22,11 +22,16 @@ function toggleButton(id) {
 function toggle(id) {
   toggleButton(id);
 
-  if (id === "btn-all") {
+  if (id === "btn-all") 
+  {
     getCards("btn-all");
-  } else if (id === "btn-open") {
+  } 
+  else if (id === "btn-open") 
+  {
     getCards("btn-open");
-  } else if (id === "btn-closed") {
+  } 
+  else if (id === "btn-closed") 
+  {
     getCards("btn-closed");
   }
 }
@@ -34,7 +39,10 @@ function toggle(id) {
 // Fetch and get all section Cards
 // Bismillahir Rahmanir Rahim.
 
-async function getCards(clickedBtn) {
+async function getCards(clickedBtn) 
+{
+  loading_icon(true);
+
   const url = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
 
   const res = await fetch(url);
@@ -59,6 +67,8 @@ async function getCards(clickedBtn) {
 
     console.log(issuesClosed.length);
   }
+
+  loading_icon(false);
 }
 
 function loadOpen(issue, icContainer) 
@@ -192,7 +202,7 @@ function loadOpen(issue, icContainer)
     }
   }
 
-    const priorityDv = ic.querySelector('.priority-card');
+  const priorityDv = ic.querySelector('.priority-card');
   priorityDv.innerHTML="";
 
   const priorityBadge = document.createElement('p');
@@ -228,7 +238,8 @@ function loadOpen(issue, icContainer)
 
 }
 
-function loadClosed(issue, icContainer) {
+function loadClosed(issue, icContainer) 
+{
   const container = icContainer;
 
   const ic = document.createElement("div");
@@ -297,7 +308,7 @@ function loadClosed(issue, icContainer) {
     
     if(label==='bug')
     {
-        console.log(label);
+        // console.log(label);
            labelButton.innerHTML = `
         
           <button class="text-xs px-3 py-1 bg-red-100 border border-red-400 text-red-600 rounded-full font-bold"> <i class="fa-solid fa-bug"></i> ${label}</button>
@@ -309,7 +320,7 @@ function loadClosed(issue, icContainer) {
     else if(label==='documentation')
     {
 
-        console.log(label);
+        // console.log(label);
            labelButton.innerHTML = `
         
           <button class="text-xs px-3 py-1 bg-yellow-100 border border-yellow-400 text-yellow-600 rounded-full font-bold"><i class="fa-solid fa-file-circle-exclamation"></i> ${label}</button>
@@ -322,7 +333,7 @@ function loadClosed(issue, icContainer) {
      else if(label==='help wanted')
     {
 
-        console.log(label);
+        // console.log(label);
            labelButton.innerHTML = `
         
           <button class="text-xs px-3 py-1 bg-blue-100 border border-blue-400 text-blue-600 rounded-full font-bold"><i class="fa-brands fa-hire-a-helper"></i> ${label}</button>
@@ -334,7 +345,7 @@ function loadClosed(issue, icContainer) {
      else if(label==='enhancement')
     {
 
-        console.log(label);
+        // console.log(label);
            labelButton.innerHTML = `
         
           <button class="text-xs px-3 py-1 bg-green-100 border border-green-400 text-green-600 rounded-full font-bold"><i class="fa-solid fa-arrow-up-right-dots"></i> ${label}</button>
@@ -347,7 +358,7 @@ function loadClosed(issue, icContainer) {
     else
     {
 
-           console.log(label);
+        //    console.log(label);
            labelButton.innerHTML = `
         
           <button class="text-xs px-3 py-1 bg-gray-100 border border-gray-400 text-gray-600 rounded-full font-bold"><i class="fa-solid fa-triangle-exclamation"></i> ${label}</button>
@@ -396,19 +407,25 @@ function loadClosed(issue, icContainer) {
 
 }
 
-function loadIssues(issues) {
+function loadIssues(issues) 
+{
   const issueContainer = document.getElementById("ic-container");
   issueContainer.innerHTML = "";
 
-  for (let issue of issues) {
-    if (issue.status === "open") {
+  for (let issue of issues) 
+    {
+    if (issue.status === "open") 
+    {
       loadOpen(issue, issueContainer);
-    } else if (issue.status === "closed") {
+    } 
+    else if (issue.status === "closed") 
+    {
       loadClosed(issue, issueContainer);
     }
   }
 }
 
+// open Issue load
 function loadIssuesOpen(issues) {
   const issueContainer = document.getElementById("ic-container");
   issueContainer.innerHTML = "";
@@ -420,6 +437,7 @@ function loadIssuesOpen(issues) {
   }
 }
 
+// closed issue load
 function loadIssuesClosed(issues) {
   const issueContainer = document.getElementById("ic-container");
   issueContainer.innerHTML = "";
@@ -431,6 +449,7 @@ function loadIssuesClosed(issues) {
   }
 }
 
+// Initially loading all cards , prothome dekhate hobe sob.
 getCards("btn-all");
 
 function countIssues(issues) {
@@ -461,22 +480,26 @@ function countIssues(issues) {
   });
 }
 
-function renderAllCounter() {
+// count Render Functions
+function renderAllCounter() 
+{
   const AllCounter = document.getElementById("issue-num");
   AllCounter.innerText = issuesALl.length;
 }
 
-function renderOpenCounter() {
+function renderOpenCounter() 
+{
   const AllCounter = document.getElementById("issue-num");
   AllCounter.innerText = issuesOpen.length;
 }
 
-function renderClosedCounter() {
+function renderClosedCounter() 
+{
   const AllCounter = document.getElementById("issue-num");
   AllCounter.innerText = issuesClosed.length;
 }
 
-
+// Modal Data load
 async function loadModal(id) 
 {
 
@@ -744,9 +767,10 @@ document.getElementById('btn-search').addEventListener('click', ()=>{
 
 })
 
-
+//  loding searched issue from API 
 async function loadSearchedIssue(searchValue)
 {
+    loading_icon(true);
     const url = `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`;
 
 
@@ -755,8 +779,10 @@ async function loadSearchedIssue(searchValue)
     const SearchedIssues = await res.json();
 
     displaySearchedIssues(SearchedIssues.data);
+    loading_icon(false);
 }
 
+// search issu display in UI
 function displaySearchedIssues(issues)
 {
 
@@ -767,6 +793,7 @@ function displaySearchedIssues(issues)
     if(searchCounter===0)
     {
         alert("No such Issue | Please Enter a Valid Keyword!");
+        const AllCounter = document.getElementById("issue-num").innerText='0';
         return;
     }
     // console.log(searchCounter);
@@ -775,6 +802,26 @@ function displaySearchedIssues(issues)
 
     
 }
+
+// Loading Icon showing while fetching and creating the cards.
+function loading_icon(boooleeaaan)
+{
+    const issueCardDiv = document.getElementById('issue-card-section');
+    const loadingIcon = document.getElementById('loading');
+
+    if(boooleeaaan)
+    {
+        issueCardDiv.classList.add('hidden');
+        loadingIcon.classList.remove('hidden');
+    }
+    else
+    {
+        loadingIcon.classList.add('hidden');
+        issueCardDiv.classList.remove('hidden');
+    }
+}
+
+
 
 
 
