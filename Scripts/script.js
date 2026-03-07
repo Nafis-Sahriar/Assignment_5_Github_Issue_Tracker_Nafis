@@ -61,7 +61,8 @@ async function getCards(clickedBtn) {
   }
 }
 
-function loadOpen(issue, icContainer) {
+function loadOpen(issue, icContainer) 
+{
   const container = icContainer;
 
   const ic = document.createElement("div");
@@ -69,7 +70,7 @@ function loadOpen(issue, icContainer) {
   ic.innerHTML = `
 
 
-    <div onclick="my_modal_1.showModal()" id="ic-crd-open" class="p-5 bg-base-100 border-t-5 border-t-green-500 shadow-md rounded-xl  hover:shadow-lg hover:shadow-green-200 transition ">
+    <div onclick="loadModal('${issue.id}')" id="ic-crd-open" class="p-5 bg-base-100 border-t-5 border-t-green-500 shadow-md rounded-xl  hover:shadow-lg hover:shadow-green-200 transition ">
 
                 <!-- Logo ar priority tag er div -->
                 <div class="flex justify-between items-center mb-3">
@@ -141,7 +142,7 @@ function loadClosed(issue, icContainer) {
 
   ic.innerHTML = `
 
-     <div onclick="my_modal_1.showModal()" id="ic-crd-closed" class="p-5 bg-base-100 border-t-5 border-t-purple-500 shadow-md rounded-xl hover:shadow-lg hover:shadow-purple-200 transition ">
+     <div onclick="loadModal(${issue.id})" id="ic-crd-closed" class="p-5 bg-base-100 border-t-5 border-t-purple-500 shadow-md rounded-xl hover:shadow-lg hover:shadow-purple-200 transition ">
 
                 <!-- Logo ar priority tag er div -->
                 <div class="flex justify-between items-center mb-3">
@@ -287,3 +288,179 @@ function renderClosedCounter() {
   const AllCounter = document.getElementById("issue-num");
   AllCounter.innerText = issuesClosed.length;
 }
+
+
+async function loadModal(id) 
+{
+
+    const url =`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
+
+
+    const res = await fetch(url);
+
+    const modalIssue = await res.json();
+
+    const issue = modalIssue.data;
+
+    if(issue.status==='open')
+    {
+
+        const openModalContainer = document.getElementById('modal_open');
+        openModalContainer.innerHTML="";
+
+
+        const modalOpen = document.createElement('section');
+
+        modalOpen.innerHTML=`
+
+         <dialog id="my_modal_1" class="modal">
+            <div class="modal-box max-w-3xl">
+
+                <h3 class="text-3xl font-bold mb-3">${issue.title}</h3>
+
+                <div class="flex items-center gap-3 text-sm mb-4">
+                    
+                    <p class=" px-3 py-1 rounded-full bg-green-200 text-green-800 border-green-700">${issue.status}</p>
+
+                    <p class="text-gray-500">  <i class="fa-solid fa-circle"></i>  ${issue.author ? issue.author : `Something Went Wrong!`}  <i class="fa-solid fa-circle"></i>  ${issue.createdAt}</p>
+                </div>
+
+                <div class="flex gap-3 mb-4 modal-tag-div">
+                  
+                </div>
+
+                <p class="text-gray-600 mb-6  "> ${issue.description}</p>
+
+                <div class="bg-gray-100 rounded-xl p-5 flex justify-between items-center mb-6">
+                    <div>
+                        <p class="text-gray-500">Assignee:</p>
+                        <p class="font-semibold text-lg">${issue.assignee?issue.assignee : `No Assignee Yet`}</p>
+                    </div>
+
+                    <div class="">
+                        <p class="text-gray-500 mb-1">Priority:</p>
+                        <p class=" px-4 py-1 rounded-full bg-gray-300 border-l-gray-700">${issue.priority}</p>
+                    </div>
+                </div>
+
+                
+                <div class="modal-action">
+                    <form method="dialog">
+                        <button class="btn btn-primary text-white border-none">Close</button>
+                    </form>
+                </div>
+
+            </div>
+        </dialog>
+        
+        
+        
+        `;
+
+    openModalContainer.append(modalOpen);
+
+
+    const labelContainer = modalOpen.querySelector(".modal-tag-div");
+    const labelsArr = issue.labels;
+
+    for (label of labelsArr) 
+    {
+    const labelButton = document.createElement("button");
+
+    labelButton.innerHTML = `
+        
+          <button class="text-xs px-3 py-1 bg-yellow-100  border-yellow-400 text-yellow-800 rounded-full">${label}</button>
+
+        `;
+    labelContainer.append(labelButton);
+    
+    }
+
+    my_modal_1.showModal();
+   }
+
+   else if(issue.status==='closed')
+   {
+
+
+     const openModalContainer = document.getElementById('modal_open');
+        openModalContainer.innerHTML="";
+
+
+        const modalOpen = document.createElement('section');
+
+        modalOpen.innerHTML=`
+
+         <dialog id="my_modal_1" class="modal">
+            <div class="modal-box max-w-3xl">
+
+                <h3 class="text-3xl font-bold mb-3">${issue.title}</h3>
+
+                <div class="flex items-center gap-3 text-sm mb-4">
+                    
+                    <p class=" px-3 py-1 rounded-full bg-purple-200 text-purple-800 border-purple-700">${issue.status}</p>
+
+                    <p class="text-gray-500">  <i class="fa-solid fa-circle"></i>  ${issue.author ? issue.author : `Something Went Wrong!`}  <i class="fa-solid fa-circle"></i>  ${issue.createdAt}</p>
+                </div>
+
+                <div class="flex gap-3 mb-4 modal-tag-div">
+                  
+                </div>
+
+                <p class="text-gray-600 mb-6  "> ${issue.description}</p>
+
+                <div class="bg-gray-100 rounded-xl p-5 flex justify-between items-center mb-6">
+                    <div>
+                        <p class="text-gray-500">Assignee:</p>
+                        <p class="font-semibold text-lg">${issue.assignee?issue.assignee : `No Assignee Yet`}</p>
+                    </div>
+
+                    <div class="">
+                        <p class="text-gray-500 mb-1">Priority:</p>
+                        <p class=" px-4 py-1 rounded-full bg-gray-300 border-l-gray-700">${issue.priority}</p>
+                    </div>
+                </div>
+
+                
+                <div class="modal-action">
+                    <form method="dialog">
+                        <button class="btn btn-primary text-white border-none">Close</button>
+                    </form>
+                </div>
+
+            </div>
+        </dialog>
+        
+        
+        
+        `;
+
+    openModalContainer.append(modalOpen);
+
+
+    const labelContainer = modalOpen.querySelector(".modal-tag-div");
+    const labelsArr = issue.labels;
+
+    for (label of labelsArr) 
+    {
+    const labelButton = document.createElement("button");
+
+    labelButton.innerHTML = `
+        
+          <button class="text-xs px-3 py-1 bg-yellow-100  border-yellow-400 text-yellow-800 rounded-full">${label}</button>
+
+        `;
+    labelContainer.append(labelButton);
+    
+    }
+
+    my_modal_1.showModal();
+
+   }
+
+   
+
+}
+
+
+
