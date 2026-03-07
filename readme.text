@@ -1,0 +1,68 @@
+Question Answers 
+
+1. What is the difference between var, let, and const?
+
+Ans --> All of these three are used to declare variable in js. But each of them behaves differently from each other, scope related difference.
+Such as var is function scoped and can be redeclared and updated later and this can make the code hard to read, reduces the readability. 
+on the other hand , let is block scoped, which means it only exists inside a block where it was declared, curly braces, and outside that we cant find it,
+but if we declare it globally, we can access. const is also same as let but it can not be modified or reassigned after initialization once. Thats the core
+difference between let and const. Another difference is hoisting. Var is hoisted and initialised with undefined first, and let const do not. They lies in 
+the temporal dead zone until declared.
+
+
+2. What is the spread operator (...)?
+
+Ans --> The spread operator is a modern feature in js which was introduced in ES6. It is used to expand elements from arrays or properties from objects.
+It is written using three dots ... and helps make code shorter, cleaner, and easier to understand. With arrays, it allows us to copy elements, merge 
+multiple arrays, or pass values separately where needed. It helps us in copying a lot. With objects, it helps copy or combine properties without changing 
+the original object. One important point is that it creates a shallow copy, not a deep copy of data. It is commonly used to avoid direct modification of 
+original data.For example,if we have two class lists, we can combine them into one using spread.By doing this, we will have both original lists unchanged 
+and a new combined list of both of them.So overall, the spread operator improves readability and makes certain data operations easy.
+
+
+3. What is the difference between map(), filter(), and forEach()?
+
+Ans --> All three map,filter,and forEach are array methods in JavaScript used to work with elements one by one, but their purpose is different.
+
+map is used when we want to transform every element and create a new array based on some rule or logic. basically when we want to do certain operations
+with each element and create a new array.
+
+filter is used when we want to select only those elements that match a certain condition and ignore else. We can do it using if else === then push etc. but filter 
+makes the filtering more easy. Just one line with condition is enough.
+
+On the other hand, forEach is used only to run a function on each element and it does not return any new array. I use it when I want to call another function
+based on each data of the array.
+
+So the main difference is that map and filter return new arrays, but foreach does not return anything useful.
+Another difference is their use case: map() is for changing data, filter() is for filtering data, and forEach is for side operations.
+They also do not change the original array unless we manually modify it inside the function. For example, if we have a list of student's
+semester final exam written marks, we can use map to add quiz marks, assignment marks, presentation marks.
+Then, We can use filter to keep only passed students, and use forEach just to print each student's name or load display them in the UI of website.
+
+
+
+4. What is an arrow function?
+
+Ans --> An arrow function is a shorter way of writing functions in JavaScript using a shorter and cleaner syntax, nothing else.
+I can write function manually like function fun_name(parameters){codes} but with arrow const add = (num1 , num2)=> num1+num2; Enough.
+
+It is written using the arrow symbol and is mostly used for small or simple tasks. If we want to return something after some lines of coding, 
+we have to use curly braces, and return keyword, else just for simple taks, no return keyword needed, it automatically returns the value.
+Compared to regular functions, arrow functions are easier to read and write in many situations. It can be a bit hard to understand initally, 
+because while learning and seeing it for the first time , it took me hours to understand actually what is happening.
+
+One important difference is that arrow functions do not have their own this value. Instead, it take "this" from the surrounding scope where they are created. 
+This is a great thing to understand and implement.Because,this makes them very useful in callback function and inside array methods.
+For example, if we have a list of prices, we can use an arrow function to quickly calculate discounted values, or the sum of all prices etc.
+
+5. What are template literals?
+
+Ans --> Template literals are a modern way of writing strings in JS using backticks instead of single or double quotes.
+They make it easier to create dynamic strings compared to traditional string. One main feature that we use the most is that we can 
+directly insert variables and expressions inside the string using ${}. It helps a lot in loading a div or any component's dynamic data from API. 
+And we can create new element and append with main html file's selected section dynmically.
+It also supports multi line strings without using special characters. Because of this, the code remains readable and becomes easy to understand what is happening.
+For example, if we want to show a student’s result, we can directly include the name and marks inside one message after fetching them from apis.
+So overall, template literals make string handling simpler and cleaner and the development easier.
+
+
