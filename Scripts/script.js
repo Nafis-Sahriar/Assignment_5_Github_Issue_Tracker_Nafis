@@ -728,6 +728,55 @@ async function loadModal(id)
 }
 
 
+// Searching Functionality
+
+document.getElementById('btn-search').addEventListener('click', ()=>{
+
+
+    const searchInput = document.getElementById('search-input');
+    const searchValue = searchInput.value.trim().toLowerCase();
+
+    // console.log(searchValue);
+
+
+    loadSearchedIssue(searchValue);
+
+
+})
+
+
+async function loadSearchedIssue(searchValue)
+{
+    const url = `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`;
+
+
+    const res = await fetch(url);
+
+    const SearchedIssues = await res.json();
+
+    displaySearchedIssues(SearchedIssues.data);
+}
+
+function displaySearchedIssues(issues)
+{
+
+    loadIssues(issues);
+
+    const searchCounter = issues.length;
+
+    if(searchCounter===0)
+    {
+        alert("No such Issue | Please Enter a Valid Keyword!");
+        return;
+    }
+    // console.log(searchCounter);
+    const AllCounter = document.getElementById("issue-num");
+    AllCounter.innerText=searchCounter;
+
+    
+}
+
+
 
 
 
