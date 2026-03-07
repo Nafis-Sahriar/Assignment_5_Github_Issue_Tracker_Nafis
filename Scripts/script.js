@@ -80,7 +80,9 @@ function loadOpen(issue, icContainer)
                         <span class="text-sm font-medium text-gray-500">Open</span>
                     </div>
 
-                    <p class="font-semibold bg-red-100 text-red-600 px-3 py-1 rounded-full">${issue.priority}</p>
+                    <div class="priority-card">
+                       
+                    </div>
 
                 </div>
 
@@ -126,13 +128,104 @@ function loadOpen(issue, icContainer)
   for (label of labelsArr) {
     const labelButton = document.createElement("button");
 
-    labelButton.innerHTML = `
+    if(label==='bug')
+    {
+        console.log(label);
+           labelButton.innerHTML = `
         
-          <button class="text-xs px-3 py-1 bg-yellow-100 border border-yellow-400 text-yellow-800 rounded-full">${label}</button>
+          <button class="text-xs px-3 py-1 bg-red-100 border border-red-400 text-red-600 rounded-full font-bold"> <i class="fa-solid fa-bug"></i> ${label}</button>
 
         `;
     labelContainer.append(labelButton);
+    }
+
+    else if(label==='documentation')
+    {
+
+        console.log(label);
+           labelButton.innerHTML = `
+        
+          <button class="text-xs px-3 py-1 bg-yellow-100 border border-yellow-400 text-yellow-600 rounded-full font-bold"><i class="fa-solid fa-file-circle-exclamation"></i> ${label}</button>
+
+        `;
+    labelContainer.append(labelButton);
+
+    }
+
+     else if(label==='help wanted')
+    {
+
+        console.log(label);
+           labelButton.innerHTML = `
+        
+          <button class="text-xs px-3 py-1 bg-blue-100 border border-blue-400 text-blue-600 rounded-full font-bold"><i class="fa-brands fa-hire-a-helper"></i> ${label}</button>
+
+        `;
+    labelContainer.append(labelButton);
+
+    }
+     else if(label==='enhancement')
+    {
+
+        console.log(label);
+           labelButton.innerHTML = `
+        
+          <button class="text-xs px-3 py-1 bg-green-100 border border-green-400 text-green-600 rounded-full font-bold"><i class="fa-solid fa-arrow-up-right-dots"></i> ${label}</button>
+
+        `;
+    labelContainer.append(labelButton);
+
+    }
+
+    else
+    {
+
+           console.log(label);
+           labelButton.innerHTML = `
+        
+          <button class="text-xs px-3 py-1 bg-gray-100 border border-gray-400 text-gray-600 rounded-full font-bold"><i class="fa-solid fa-triangle-exclamation"></i> ${label}</button>
+
+        `;
+    labelContainer.append(labelButton);
+
+
+    }
   }
+
+    const priorityDv = ic.querySelector('.priority-card');
+  priorityDv.innerHTML="";
+
+  const priorityBadge = document.createElement('p');
+
+      if(issue.priority==='high')
+    {
+        priorityBadge.innerHTML=`
+
+         <p class=" px-4 py-1 rounded-full bg-red-300 border-l-red-700 font-bold text-red-800">${issue.priority}</p>
+        `;
+        priorityDv.append(priorityBadge);
+
+    }
+    else if(issue.priority==='medium')
+    {
+         priorityBadge.innerHTML=`
+
+         <p class=" px-4 py-1 rounded-full bg-orange-300 border-l-orange-700 font-bold text-orange-800">${issue.priority}</p>
+        `;
+        priorityDv.append(priorityBadge);
+    }
+    else if(issue.priority==='low')
+    {
+         priorityBadge.innerHTML=`
+
+         <p class=" px-4 py-1 rounded-full bg-gray-300 border-gray-700 font-bold text-gray-800">${issue.priority}</p>
+        `;
+         priorityDv.append(priorityBadge);
+    }
+
+
+
+
 }
 
 function loadClosed(issue, icContainer) {
@@ -152,8 +245,10 @@ function loadClosed(issue, icContainer) {
                         <span class="text-sm font-medium text-gray-500">Closed</span>
                     </div>
 
-                    <p class="font-semibold bg-red-100 text-red-600 px-3 py-1 rounded-full">${issue.priority}</p>
-
+                    <div class="priority-card">
+                       
+                    </div>
+                
                 </div>
 
                 <!-- Title + Description | Eta dynamically load hobe API Theke -->
@@ -199,14 +294,106 @@ function loadClosed(issue, icContainer) {
 
   for (label of labelsArr) {
     const labelButton = document.createElement("button");
-
-    labelButton.innerHTML = `
+    
+    if(label==='bug')
+    {
+        console.log(label);
+           labelButton.innerHTML = `
         
-          <button class="text-xs px-3 py-1 bg-yellow-100 border border-yellow-400 text-yellow-800 rounded-full">${label}</button>
+          <button class="text-xs px-3 py-1 bg-red-100 border border-red-400 text-red-600 rounded-full font-bold"> <i class="fa-solid fa-bug"></i> ${label}</button>
 
         `;
     labelContainer.append(labelButton);
+    }
+
+    else if(label==='documentation')
+    {
+
+        console.log(label);
+           labelButton.innerHTML = `
+        
+          <button class="text-xs px-3 py-1 bg-yellow-100 border border-yellow-400 text-yellow-600 rounded-full font-bold"><i class="fa-solid fa-file-circle-exclamation"></i> ${label}</button>
+
+        `;
+    labelContainer.append(labelButton);
+
+    }
+
+     else if(label==='help wanted')
+    {
+
+        console.log(label);
+           labelButton.innerHTML = `
+        
+          <button class="text-xs px-3 py-1 bg-blue-100 border border-blue-400 text-blue-600 rounded-full font-bold"><i class="fa-brands fa-hire-a-helper"></i> ${label}</button>
+
+        `;
+    labelContainer.append(labelButton);
+
+    }
+     else if(label==='enhancement')
+    {
+
+        console.log(label);
+           labelButton.innerHTML = `
+        
+          <button class="text-xs px-3 py-1 bg-green-100 border border-green-400 text-green-600 rounded-full font-bold"><i class="fa-solid fa-arrow-up-right-dots"></i> ${label}</button>
+
+        `;
+    labelContainer.append(labelButton);
+
+    }
+
+    else
+    {
+
+           console.log(label);
+           labelButton.innerHTML = `
+        
+          <button class="text-xs px-3 py-1 bg-gray-100 border border-gray-400 text-gray-600 rounded-full font-bold"><i class="fa-solid fa-triangle-exclamation"></i> ${label}</button>
+
+        `;
+    labelContainer.append(labelButton);
+
+
+    }
+   
+
+ 
   }
+
+
+  const priorityDv = ic.querySelector('.priority-card');
+  priorityDv.innerHTML="";
+
+  const priorityBadge = document.createElement('p');
+
+      if(issue.priority==='high')
+    {
+        priorityBadge.innerHTML=`
+
+         <p class=" px-4 py-1 rounded-full bg-red-300 border-l-red-700 font-bold text-red-800">${issue.priority}</p>
+        `;
+        priorityDv.append(priorityBadge);
+
+    }
+    else if(issue.priority==='medium')
+    {
+         priorityBadge.innerHTML=`
+
+         <p class=" px-4 py-1 rounded-full bg-orange-300 border-l-orange-700 font-bold text-orange-800">${issue.priority}</p>
+        `;
+        priorityDv.append(priorityBadge);
+    }
+    else if(issue.priority==='low')
+    {
+         priorityBadge.innerHTML=`
+
+         <p class=" px-4 py-1 rounded-full bg-gray-300 border-gray-700 font-bold text-gray-800">${issue.priority}</p>
+        `;
+         priorityDv.append(priorityBadge);
+    }
+
 }
 
 function loadIssues(issues) {
@@ -460,7 +647,9 @@ async function loadModal(id)
 
                     <div class="">
                         <p class="text-gray-500 mb-1">Priority:</p>
-                        <p class=" px-4 py-1 rounded-full bg-gray-300 border-l-gray-700">${issue.priority}</p>
+                        <div class="modal-priority">
+                            
+                        </div>
                     </div>
                 </div>
 
@@ -495,6 +684,39 @@ async function loadModal(id)
         `;
     labelContainer.append(labelButton);
     
+    }
+
+
+
+       const prior = modalOpen.querySelector('.modal-priority');
+
+    const priortag = document.createElement('p');
+    priortag.innerHTML="";
+
+    if(issue.priority==='high')
+    {
+        priortag.innerHTML=`
+
+         <p class=" px-4 py-1 rounded-full bg-red-300 border-l-red-700 font-bold text-red-800">${issue.priority}</p>
+        `
+        prior.append(priortag);
+
+    }
+    else if(issue.priority==='medium')
+    {
+         priortag.innerHTML=`
+
+         <p class=" px-4 py-1 rounded-full bg-orange-300 border-l-orange-700 font-bold text-orange-800">${issue.priority}</p>
+        `
+         prior.append(priortag);
+    }
+    else if(issue.priority==='low')
+    {
+         priortag.innerHTML=`
+
+         <p class=" px-4 py-1 rounded-full bg-gray-300 border-gray-700 font-bold text-gray-800">${issue.priority}</p>
+        `
+         prior.append(priortag);
     }
 
     my_modal_1.showModal();
