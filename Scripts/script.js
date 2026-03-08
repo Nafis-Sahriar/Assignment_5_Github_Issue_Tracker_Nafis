@@ -19,16 +19,17 @@ function toggleButton(id) {
 }
 
 // Toggle button Funtion
-function toggle(id) {
+function toggle(id) 
+{
   toggleButton(id);
 
   if (id === "btn-all") 
   {
-    getCards("btn-all");
+    getCards("btn-all");  // Getting the cards | load the cards | issue data array | store dynamically | append
   } 
   else if (id === "btn-open") 
   {
-    getCards("btn-open");
+    getCards("btn-open"); // Getting the cards | load the cards | issue data array | store dynamically | append
   } 
   else if (id === "btn-closed") 
   {
@@ -51,7 +52,8 @@ async function getCards(clickedBtn)
 
   countIssues(issues.data);
 
-  if (clickedBtn === "btn-all") {
+  if (clickedBtn === "btn-all") 
+    {
     loadIssues(issues.data);
     renderAllCounter();
 
@@ -211,7 +213,7 @@ function loadOpen(issue, icContainer)
     {
         priorityBadge.innerHTML=`
 
-         <p class=" px-4 py-1 rounded-full bg-red-300 border-l-red-700 font-bold text-red-800">${issue.priority}</p>
+         <p class=" px-4 py-1 rounded-full border-2 bg-red-300 border-l-red-700 font-bold text-red-800">${issue.priority}</p>
         `;
         priorityDv.append(priorityBadge);
 
@@ -220,7 +222,7 @@ function loadOpen(issue, icContainer)
     {
          priorityBadge.innerHTML=`
 
-         <p class=" px-4 py-1 rounded-full bg-orange-300 border-l-orange-700 font-bold text-orange-800">${issue.priority}</p>
+         <p class=" px-4 py-1 rounded-full border-2 bg-orange-300 border-l-orange-700 font-bold text-orange-800">${issue.priority}</p>
         `;
         priorityDv.append(priorityBadge);
     }
@@ -228,7 +230,7 @@ function loadOpen(issue, icContainer)
     {
          priorityBadge.innerHTML=`
 
-         <p class=" px-4 py-1 rounded-full bg-gray-300 border-gray-700 font-bold text-gray-800">${issue.priority}</p>
+         <p class=" px-4 py-1 rounded-full border-2 bg-gray-300 border-gray-700 font-bold text-gray-800">${issue.priority}</p>
         `;
          priorityDv.append(priorityBadge);
     }
@@ -303,7 +305,8 @@ function loadClosed(issue, icContainer)
 
   const labelsArr = issue.labels;
 
-  for (label of labelsArr) {
+  for (label of labelsArr) 
+    {
     const labelButton = document.createElement("button");
     
     if(label==='bug')
@@ -383,7 +386,7 @@ function loadClosed(issue, icContainer)
     {
         priorityBadge.innerHTML=`
 
-         <p class=" px-4 py-1 rounded-full bg-red-300 border-l-red-700 font-bold text-red-800">${issue.priority}</p>
+         <p class=" px-4 py-1 rounded-full border-2 bg-red-300 border-l-red-700 font-bold text-red-800">${issue.priority}</p>
         `;
         priorityDv.append(priorityBadge);
 
@@ -392,7 +395,7 @@ function loadClosed(issue, icContainer)
     {
          priorityBadge.innerHTML=`
 
-         <p class=" px-4 py-1 rounded-full bg-orange-300 border-l-orange-700 font-bold text-orange-800">${issue.priority}</p>
+         <p class=" px-4 py-1 rounded-full border-2 bg-orange-300 border-l-orange-700 font-bold text-orange-800">${issue.priority}</p>
         `;
         priorityDv.append(priorityBadge);
     }
@@ -400,7 +403,7 @@ function loadClosed(issue, icContainer)
     {
          priorityBadge.innerHTML=`
 
-         <p class=" px-4 py-1 rounded-full bg-gray-300 border-gray-700 font-bold text-gray-800">${issue.priority}</p>
+         <p class=" px-4 py-1 rounded-full border-2 bg-gray-300 border-gray-700 font-bold text-gray-800">${issue.priority}</p>
         `;
          priorityDv.append(priorityBadge);
     }
@@ -530,9 +533,9 @@ async function loadModal(id)
 
                 <div class="flex items-center gap-3 text-sm mb-4">
                     
-                    <p class=" px-3 py-1 rounded-full bg-green-200 text-green-800 border-green-700">${issue.status}</p>
+                    <p class=" px-3 py-1 rounded-full border-2 font-bold bg-green-200 text-green-800 border-green-700">${issue.status}</p>
 
-                    <p class="text-gray-500">  <i class="fa-solid fa-circle"></i>  ${issue.author ? issue.author : `Something Went Wrong!`}  <i class="fa-solid fa-circle"></i>  ${issue.createdAt}</p>
+                    <p class="text-gray-500">  <i class="fa-solid fa-circle"></i> Opened By -  ${issue.author ?  issue.author : `Something Went Wrong!`}  <i class="fa-solid fa-circle"></i>  ${issue.createdAt}</p>
                 </div>
 
                 <div class="flex gap-3 mb-4 modal-tag-div">
@@ -578,16 +581,73 @@ async function loadModal(id)
     for (label of labelsArr) 
     {
     const labelButton = document.createElement("button");
-
-    labelButton.innerHTML = `
+    
+    if(label==='bug')
+    {
+        // console.log(label);
+           labelButton.innerHTML = `
         
-          <button class="text-xs px-3 py-1 bg-yellow-100  border-yellow-400 text-yellow-800 rounded-full">${label}</button>
+          <button class="text-xs px-3 py-1 bg-red-100 border border-red-400 text-red-600 rounded-full font-bold"> <i class="fa-solid fa-bug"></i> ${label}</button>
 
         `;
     labelContainer.append(labelButton);
-    
     }
 
+    else if(label==='documentation')
+    {
+
+        // console.log(label);
+           labelButton.innerHTML = `
+        
+          <button class="text-xs px-3 py-1 bg-yellow-100 border border-yellow-400 text-yellow-600 rounded-full font-bold"><i class="fa-solid fa-file-circle-exclamation"></i> ${label}</button>
+
+        `;
+    labelContainer.append(labelButton);
+
+    }
+
+     else if(label==='help wanted')
+    {
+
+        // console.log(label);
+           labelButton.innerHTML = `
+        
+          <button class="text-xs px-3 py-1 bg-blue-100 border border-blue-400 text-blue-600 rounded-full font-bold"><i class="fa-brands fa-hire-a-helper"></i> ${label}</button>
+
+        `;
+    labelContainer.append(labelButton);
+
+    }
+     else if(label==='enhancement')
+    {
+
+        // console.log(label);
+           labelButton.innerHTML = `
+        
+          <button class="text-xs px-3 py-1 bg-green-100 border border-green-400 text-green-600 rounded-full font-bold"><i class="fa-solid fa-arrow-up-right-dots"></i> ${label}</button>
+
+        `;
+    labelContainer.append(labelButton);
+
+    }
+
+    else
+    {
+
+        //    console.log(label);
+           labelButton.innerHTML = `
+        
+          <button class="text-xs px-3 py-1 bg-gray-100 border border-gray-400 text-gray-600 rounded-full font-bold"><i class="fa-solid fa-triangle-exclamation"></i> ${label}</button>
+
+        `;
+    labelContainer.append(labelButton);
+
+
+    }
+   
+
+ 
+  }
 
     const prior = modalOpen.querySelector('.modal-priority');
 
@@ -598,7 +658,7 @@ async function loadModal(id)
     {
         priortag.innerHTML=`
 
-         <p class=" px-4 py-1 rounded-full bg-red-300 border-l-red-700 font-bold text-red-800">${issue.priority}</p>
+         <p class=" px-4 py-1 rounded-full border-2 bg-red-300 border-red-700 font-bold text-red-800">${issue.priority}</p>
         `
         prior.append(priortag);
 
@@ -607,7 +667,7 @@ async function loadModal(id)
     {
          priortag.innerHTML=`
 
-         <p class=" px-4 py-1 rounded-full bg-orange-300 border-l-orange-700 font-bold text-orange-800">${issue.priority}</p>
+         <p class=" px-4 py-1 rounded-full border-2 bg-orange-300 border-orange-700 font-bold text-orange-800">${issue.priority}</p>
         `
          prior.append(priortag);
     }
@@ -615,20 +675,12 @@ async function loadModal(id)
     {
          priortag.innerHTML=`
 
-         <p class=" px-4 py-1 rounded-full bg-gray-300 border-gray-700 font-bold text-gray-800">${issue.priority}</p>
+         <p class=" px-4 py-1 rounded-full border-2 bg-gray-300 border-gray-700 font-bold text-gray-800">${issue.priority}</p>
         `
          prior.append(priortag);
     }
 
    
-
-
-
-
-
-
-
-
     my_modal_1.showModal();
    }
 
@@ -651,9 +703,9 @@ async function loadModal(id)
 
                 <div class="flex items-center gap-3 text-sm mb-4">
                     
-                    <p class=" px-3 py-1 rounded-full bg-purple-200 text-purple-800 border-purple-700">${issue.status}</p>
+                    <p class=" px-3 py-1 rounded-full border-2 font-bold bg-purple-200 text-purple-800 border-purple-700">${issue.status}</p>
 
-                    <p class="text-gray-500">  <i class="fa-solid fa-circle"></i>  ${issue.author ? issue.author : `Something Went Wrong!`}  <i class="fa-solid fa-circle"></i>  ${issue.createdAt}</p>
+                    <p class="text-gray-500">  <i class="fa-solid fa-circle"></i> Closed By - ${issue.author ? issue.author : `Something Went Wrong!`}  <i class="fa-solid fa-circle"></i>  ${issue.createdAt}</p>
                 </div>
 
                 <div class="flex gap-3 mb-4 modal-tag-div">
@@ -699,19 +751,77 @@ async function loadModal(id)
     for (label of labelsArr) 
     {
     const labelButton = document.createElement("button");
-
-    labelButton.innerHTML = `
+    
+    if(label==='bug')
+    {
+        // console.log(label);
+           labelButton.innerHTML = `
         
-          <button class="text-xs px-3 py-1 bg-yellow-100  border-yellow-400 text-yellow-800 rounded-full">${label}</button>
+          <button class="text-xs px-3 py-1 bg-red-100 border border-red-400 text-red-600 rounded-full font-bold"> <i class="fa-solid fa-bug"></i> ${label}</button>
 
         `;
     labelContainer.append(labelButton);
-    
     }
 
+    else if(label==='documentation')
+    {
+
+        // console.log(label);
+           labelButton.innerHTML = `
+        
+          <button class="text-xs px-3 py-1 bg-yellow-100 border border-yellow-400 text-yellow-600 rounded-full font-bold"><i class="fa-solid fa-file-circle-exclamation"></i> ${label}</button>
+
+        `;
+    labelContainer.append(labelButton);
+
+    }
+
+     else if(label==='help wanted')
+    {
+
+        // console.log(label);
+           labelButton.innerHTML = `
+        
+          <button class="text-xs px-3 py-1 bg-blue-100 border border-blue-400 text-blue-600 rounded-full font-bold"><i class="fa-brands fa-hire-a-helper"></i> ${label}</button>
+
+        `;
+    labelContainer.append(labelButton);
+
+    }
+     else if(label==='enhancement')
+    {
+
+        // console.log(label);
+           labelButton.innerHTML = `
+        
+          <button class="text-xs px-3 py-1 bg-green-100 border border-green-400 text-green-600 rounded-full font-bold"><i class="fa-solid fa-arrow-up-right-dots"></i> ${label}</button>
+
+        `;
+    labelContainer.append(labelButton);
+
+    }
+
+    else
+    {
+
+        //    console.log(label);
+           labelButton.innerHTML = `
+        
+          <button class="text-xs px-3 py-1 bg-gray-100 border border-gray-400 text-gray-600 rounded-full font-bold"><i class="fa-solid fa-triangle-exclamation"></i> ${label}</button>
+
+        `;
+    labelContainer.append(labelButton);
 
 
-       const prior = modalOpen.querySelector('.modal-priority');
+    }
+   
+
+ 
+  }
+
+
+
+    const prior = modalOpen.querySelector('.modal-priority');
 
     const priortag = document.createElement('p');
     priortag.innerHTML="";
@@ -720,7 +830,7 @@ async function loadModal(id)
     {
         priortag.innerHTML=`
 
-         <p class=" px-4 py-1 rounded-full bg-red-300 border-l-red-700 font-bold text-red-800">${issue.priority}</p>
+         <p class=" px-4 py-1 rounded-full border-2 bg-red-300 border-l-red-700 font-bold text-red-800">${issue.priority}</p>
         `
         prior.append(priortag);
 
@@ -729,7 +839,7 @@ async function loadModal(id)
     {
          priortag.innerHTML=`
 
-         <p class=" px-4 py-1 rounded-full bg-orange-300 border-l-orange-700 font-bold text-orange-800">${issue.priority}</p>
+         <p class=" px-4 py-1 rounded-full border-2 bg-orange-300 border-l-orange-700 font-bold text-orange-800">${issue.priority}</p>
         `
          prior.append(priortag);
     }
@@ -737,7 +847,7 @@ async function loadModal(id)
     {
          priortag.innerHTML=`
 
-         <p class=" px-4 py-1 rounded-full bg-gray-300 border-gray-700 font-bold text-gray-800">${issue.priority}</p>
+         <p class=" px-4 py-1 rounded-full border-2 bg-gray-300 border-gray-700 font-bold text-gray-800">${issue.priority}</p>
         `
          prior.append(priortag);
     }
